@@ -15,7 +15,7 @@ predictors = list(filter(lambda x: x[-4:] == '_tm1', list(data.columns)))
 
 # sample dataset json?
 config = {
-    'y_col' : 'refer_t',
+    'y_col' : 'refer',
     'X_cols' : predictors,
     'group_cols' : ['race', 'dem_female'],
     'prediction_type' : 'binary',

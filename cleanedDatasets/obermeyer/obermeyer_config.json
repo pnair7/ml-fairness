@@ -1,5 +1,5 @@
 {
-    "y_col": "refer_t",
+    "y_col": "refer",
     "X_cols": [
         "dem_age_band_18-24_tm1",
         "dem_age_band_25-34_tm1",
