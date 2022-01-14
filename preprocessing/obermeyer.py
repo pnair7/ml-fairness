@@ -1,5 +1,6 @@
 import pandas as pd
 from scipy.stats import percentileofscore
+import json
 
 data = pd.read_csv('rawDatasets/obermeyer_data.csv')
 
@@ -11,15 +12,19 @@ data['refer'] = (data['risk_score_t'].apply(lambda x: percentileofscore(data['ri
 # drop current time columns
 predictors = list(filter(lambda x: x[-4:] == '_tm1', list(data.columns)))
 
-print(predictors)
 
 # sample dataset json?
-# {
-#     'y_col' : 'refer_t',
-#     'X_cols' : predictors,
-#     'group_cols' : ['race', 'dem_female'],
-#     'prediction_type' : '',
-#     'dataset_name' : 'Obermeyer Health Dataset',
-#     'data_path' : 'rawDatasets/obermeyer_data.csv',
-#     'data_script' : 'preprocessing/obermeyer.py'
-# }
+config = {
+    'y_col' : 'refer_t',
+    'X_cols' : predictors,
+    'group_cols' : ['race', 'dem_female'],
+    'prediction_type' : 'binary',
+    'dataset_name' : 'Obermeyer Health Dataset',
+    'data_path' : 'rawDatasets/obermeyer_data.csv',
+    'data_script' : 'preprocessing/obermeyer.py'
+}
+
+# output to folder -- this structure could change
+data.to_csv('cleanedDatasets/obermeyer/obermeyer_data.csv', index = False)
+with open('cleanedDatasets/obermeyer/obermeyer_config.json', 'w', encoding='utf-8') as f:
+    json.dump(config, f, ensure_ascii=False, indent=4)
