@@ -26,10 +26,12 @@ for dataset in datasets:
     X = df[config['X_cols']]
     y = df[config['y_col']]
 
+    # probably need to make a custom function to do this since we also need something for the sensitive groups
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state=42)
 
     for model in models:
         pass
+    
     ## define model w/ parameters if needed
 
     ## apply model to dataset, yield result with predictions
