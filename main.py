@@ -3,6 +3,7 @@ import numpy as np
 import json
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
+from utils import utils
 import os
 
 ## define lists of models, datasets, and metrics
@@ -22,16 +23,24 @@ for dataset in datasets:
     with open(os.path.join(dataset_path, json_path), 'r') as f:
         config = json.load(f)
 
-    ## split X and y using columns from config
-    X = df[config['X_cols']]
-    y = df[config['y_col']]
+    print(config['dataset_name'])
 
-    # probably need to make a custom function to do this since we also need something for the sensitive groups
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state=42)
+    ## split X and y using columns from config
+    ## TODO: this try-catch should be removed, this is here to allow main to run even if some config files have errors
+    try:
+        X = df[config['X_cols']]
+        y = df[config['y_col']]
+        groups = df[config['group_cols'][0]] # TODO: handle multiple groups -- should be trivial, not worrying about it now
+    except:
+        print('\tError reading columns from ', config['dataset_name'])
+        continue
+
+    # same as sklearn's train_test_split, but we include the column for the group
+    X_train, X_test, y_train, y_test, group_train, group_test = train_test_split(X, y, groups, train_size = 0.75)
 
     for model in models:
         pass
-    
+
     ## define model w/ parameters if needed
 
     ## apply model to dataset, yield result with predictions

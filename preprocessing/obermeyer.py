@@ -9,15 +9,14 @@ data = pd.read_csv('rawDatasets/obermeyer_data.csv')
 # produce y column
 data['refer'] = (data['risk_score_t'].apply(lambda x: percentileofscore(data['risk_score_t'], x))>= 97.0).astype(int)
 
-# drop current time columns
+# define list of predictor columns
 predictors = list(filter(lambda x: x[-4:] == '_tm1', list(data.columns)))
-
 
 # sample dataset json?
 config = {
-    'y_col' : 'refer',
-    'X_cols' : predictors,
-    'group_cols' : ['race', 'dem_female'],
+    'y_col' : 'refer', # which column are we predicting
+    'X_cols' : predictors, # list of columns in X -- predictor variables
+    'group_cols' : ['race', 'dem_female'], # what are the groups we're interested in being fair to?
     'prediction_type' : 'binary',
     'dataset_name' : 'Obermeyer Health Dataset',
     'data_path' : 'rawDatasets/obermeyer_data.csv',
