@@ -1,7 +1,8 @@
 import pandas as pd 
 import numpy as np
+import random
 
-def split_data(X, y, groups, train_size = 0.75):
+def split_data(X, y, groups, train_pct = 0.75):
     '''
     X and y are Pandas DataFrames of features and labels, respectively. (See ~/main.py).
     groups is a Series of the group column.
@@ -12,11 +13,11 @@ def split_data(X, y, groups, train_size = 0.75):
 
     random.seed(42)
     X_shuffled = X.sample(frac = 1)
-    y_shuffled = y.loc[X_shuffled]
-    groups = y.loc[X_shuffled]
+    y_shuffled = y.loc[list(X_shuffled.index)]
+    groups = y.loc[list(X_shuffled.index)]
 
     # generate train, test, groups split by train_size
-    n_train = int(train_size * len(X))
+    n_train = int(train_pct * len(X))
     X_train = X_shuffled.iloc[:n_train]
     X_test = X_shuffled.iloc[n_train:]
     y_train = y_shuffled.iloc[:n_train]
