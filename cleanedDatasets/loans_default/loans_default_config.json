@@ -2,7 +2,6 @@
     "y_col": "default payment next month",
     "X_cols": [
         "LIMIT_BAL",
-        "SEX",
         "EDUCATION",
         "MARRIAGE",
         "AGE",
@@ -26,8 +25,7 @@
         "PAY_AMT6"
     ],
     "group_cols": [
-        "race",
-        "dem_female"
+        "SEX"
     ],
     "prediction_type": "binary",
     "dataset_name": "Loans Default Dataset",

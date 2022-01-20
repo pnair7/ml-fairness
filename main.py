@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import json
-from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from utils import utils
 import os
@@ -50,6 +49,6 @@ for dataset in datasets:
         pass
         ## apply fairness metric to predictions
         
-        ## output result (probably by appending to list that becomes result matrix
+        ## output result (probably by appending to list that becomes result matrix)
 
 # TODO: couple things to think about: multiple group columns? with/without using group in classification?

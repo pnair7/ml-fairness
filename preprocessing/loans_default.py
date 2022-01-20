@@ -28,7 +28,7 @@ predictors = list(data.iloc[:,:-1])
 config = {
     'y_col' : 'default payment next month',
     'X_cols' : predictors,
-    'group_cols' : ['race', 'dem_female'],
+    'group_cols' : ['SEX'],
     'prediction_type' : 'binary',
     'dataset_name' : 'Loans Default Dataset',
     'data_path' : 'rawDatasets/loans_default_data.csv',
