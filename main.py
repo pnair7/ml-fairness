@@ -2,13 +2,13 @@ import pandas as pd
 import numpy as np
 import json
 from sklearn.model_selection import train_test_split
-from models.sklearn_models import logistic_regression
+from models.sklearn_models import logistic_regression, decision_tree
 from utils import utils
 import os
 
 ## define lists of models, datasets, and metrics
 datasets = os.listdir('cleanedDatasets/')
-models = []
+models = [logistic_regression, decision_tree]
 metrics = []
 
 ## iterate through (model, dataset, metric) tuples
@@ -38,7 +38,8 @@ for dataset in datasets:
     # same as sklearn's train_test_split, but we include the column for the group
     X_train, X_test, y_train, y_test, group_train, group_test = utils.split_data(X, y, groups, train_pct=0.75)
 
-    print(logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config, class_weight = None))
+    print(logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config, class_weight = 'balanced'))
+    print(decision_tree(X_train, X_test, y_train, y_test, group_train, group_test, config))
 
     for model in models:
         pass
