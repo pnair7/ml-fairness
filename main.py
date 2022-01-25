@@ -38,21 +38,15 @@ for dataset in datasets:
     # same as sklearn's train_test_split, but we include the column for the group
     X_train, X_test, y_train, y_test, group_train, group_test = utils.split_data(X, y, groups, train_pct=0.75)
 
-    print(logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config, class_weight = 'balanced'))
-    print(decision_tree(X_train, X_test, y_train, y_test, group_train, group_test, config))
-
     for model in models:
-        pass
+        ## apply model to dataset, yield result with predictions
+        print(model(X_train, X_test, y_train, y_test, group_train, group_test, config))
 
-    ## define model w/ parameters if needed
-
-    ## apply model to dataset, yield result with predictions
-
-    ## import functions for each fairness metric on standardized output format
-    for metric in metrics:
-        pass
-        ## apply fairness metric to predictions
-        
-        ## output result (probably by appending to list that becomes result matrix)
+        ## import functions for each fairness metric on standardized output format
+        for metric in metrics:
+            pass
+            ## apply fairness metric to predictions
+            
+            ## output result (probably by appending to list that becomes result matrix)
 
 # TODO: couple things to think about: multiple group columns? with/without using group in classification?
