@@ -4,12 +4,13 @@ import json
 from sklearn.model_selection import train_test_split
 from models.sklearn_models import logistic_regression, decision_tree
 from utils import utils
+from metrics.metrics import FPR
 import os
 
 ## define lists of models, datasets, and metrics
 datasets = os.listdir('cleanedDatasets/')
 models = [logistic_regression, decision_tree]
-metrics = []
+metrics = [FPR]
 
 ## iterate through (model, dataset, metric) tuples
 
@@ -40,13 +41,12 @@ for dataset in datasets:
 
     for model in models:
         ## apply model to dataset, yield result with predictions
-        print(model(X_train, X_test, y_train, y_test, group_train, group_test, config))
+        results, mdl_obj = model(X_train, X_test, y_train, y_test, group_train, group_test, config)
 
         ## import functions for each fairness metric on standardized output format
         for metric in metrics:
-            pass
             ## apply fairness metric to predictions
-            
+            metric(list(y_test), results, list(group_test))
             ## output result (probably by appending to list that becomes result matrix)
 
 # TODO: couple things to think about: multiple group columns? with/without using group in classification?
