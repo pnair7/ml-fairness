@@ -1,15 +1,14 @@
 import pandas as pd
 import numpy as np
 import json
-from sklearn.model_selection import train_test_split
-from models.sklearn_models import logistic_regression, decision_tree
 from utils import utils
-from metrics.metrics import FPR
+from metrics.metrics import *
+from sklearn.model_selection import train_test_split
 import os
 
 ## define lists of models, datasets, and metrics
 datasets = os.listdir('cleanedDatasets/')
-models = [logistic_regression, decision_tree]
+model_names = ['logistic_regression', 'decision_tree']
 metrics = [FPR]
 
 ## iterate through (model, dataset, metric) tuples
@@ -39,9 +38,10 @@ for dataset in datasets:
     # same as sklearn's train_test_split, but we include the column for the group
     X_train, X_test, y_train, y_test, group_train, group_test = utils.split_data(X, y, groups, train_pct=0.75)
 
-    for model in models:
+    for model_name in model_names:
         ## apply model to dataset, yield result with predictions
-        results, mdl_obj = model(X_train, X_test, y_train, y_test, group_train, group_test, config)
+        print(model_name)
+        results, mdl_obj = utils.run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_test, config)
 
         ## import functions for each fairness metric on standardized output format
         for metric in metrics:

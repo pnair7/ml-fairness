@@ -1,6 +1,7 @@
 import pandas as pd 
 import numpy as np
 import random
+from models.sklearn_models import *
 
 def split_data(X, y, groups, train_pct = 0.75):
     '''
@@ -26,3 +27,9 @@ def split_data(X, y, groups, train_pct = 0.75):
     group_test = groups.iloc[n_train:]
 
     return X_train, X_test, y_train, y_test, group_train, group_test
+
+def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    if model_name == 'logistic_regression':
+        return logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config)
+    elif model_name == 'decision_tree':
+        return decision_tree(X_train, X_test, y_train, y_test, group_train, group_test, config)
