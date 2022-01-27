@@ -1,9 +1,11 @@
-import pandas as pd 
+import pandas as pd
 import numpy as np
 import random
 from models.sklearn_models import *
+from metrics.metrics import *
 
-def split_data(X, y, groups, train_pct = 0.75):
+
+def split_data(X, y, groups, train_pct=0.75):
     '''
     X and y are Pandas DataFrames of features and labels, respectively. (See ~/main.py).
     groups is a Series of the group column.
@@ -13,7 +15,7 @@ def split_data(X, y, groups, train_pct = 0.75):
     assert len(X) == len(y) == len(groups)
 
     random.seed(42)
-    X_shuffled = X.sample(frac = 1)
+    X_shuffled = X.sample(frac=1)
     y_shuffled = y.loc[list(X_shuffled.index)]
     groups = y.loc[list(X_shuffled.index)]
 
@@ -28,8 +30,14 @@ def split_data(X, y, groups, train_pct = 0.75):
 
     return X_train, X_test, y_train, y_test, group_train, group_test
 
+
 def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_test, config):
     if model_name == 'logistic_regression':
         return logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config)
     elif model_name == 'decision_tree':
         return decision_tree(X_train, X_test, y_train, y_test, group_train, group_test, config)
+
+
+def apply_metric(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    if metric_name == 'FPR':
+        return FPR(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config)

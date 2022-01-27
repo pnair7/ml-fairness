@@ -4,49 +4,59 @@ import json
 from utils import utils
 from metrics.metrics import *
 from sklearn.model_selection import train_test_split
+from collections import defaultdict
 import os
 
-## define lists of models, datasets, and metrics
+# define lists of models, datasets, and metrics
 datasets = os.listdir('cleanedDatasets/')
 model_names = ['logistic_regression', 'decision_tree']
-metrics = [FPR]
+metrics = ['FPR']
 
-## iterate through (model, dataset, metric) tuples
-
+# iterate through (model, dataset, metric) tuples
+fairness_dict = defaultdict(dict)  # dict of resulting 3-D matrix
 for dataset in datasets:
-    ## read in data (should already be cleaned and in standard format)
+    # read in data (should already be cleaned and in standard format)
     dataset_path = os.path.join('cleanedDatasets', dataset)
-    csv_path = list(filter(lambda f: f[-3:] == 'csv', os.listdir(dataset_path)))[0]
-    json_path = list(filter(lambda f: f[-4:] == 'json', os.listdir(dataset_path)))[0]
-    
+    csv_path = list(
+        filter(lambda f: f[-3:] == 'csv', os.listdir(dataset_path)))[0]
+    json_path = list(
+        filter(lambda f: f[-4:] == 'json', os.listdir(dataset_path)))[0]
+
     df = pd.read_csv(os.path.join(dataset_path, csv_path))
     with open(os.path.join(dataset_path, json_path), 'r') as f:
         config = json.load(f)
 
-    print(config['dataset_name'])
+    dataset_name = config['dataset_name']
+    print(dataset_name)
 
-    ## split X and y using columns from config
-    ## TODO: this try-catch should be removed, this is here to allow main to run even if some config files have errors
+    # split X and y using columns from config
+    # TODO: this try-catch should be removed, this is here to allow main to run even if some config files have errors
     try:
         X = df[config['X_cols']]
         y = df[config['y_col']]
-        groups = df[config['group_cols'][0]] # TODO: handle multiple groups -- should be trivial, not worrying about it now
+        # TODO: handle multiple groups -- should be trivial, not worrying about it now
+        groups = df[config['group_cols'][0]]
     except:
-        print('\tError reading columns from ', config['dataset_name'])
+        print('\tError reading columns from ', dataset_name)
         continue
 
     # same as sklearn's train_test_split, but we include the column for the group
-    X_train, X_test, y_train, y_test, group_train, group_test = utils.split_data(X, y, groups, train_pct=0.75)
+    X_train, X_test, y_train, y_test, group_train, group_test = utils.split_data(
+        X, y, groups, train_pct=0.75)
+
+    data_attributes = (X_train, X_test, y_train, y_test, group_train, group_test, config)
 
     for model_name in model_names:
-        ## apply model to dataset, yield result with predictions
-        print(model_name)
-        results, mdl_obj = utils.run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_test, config)
+        # apply model to dataset, yield result with predictions
+        print('\t' + model_name)
+        results, mdl_obj = utils.run_models(
+            model_name, *data_attributes)  # unpacking
 
-        ## import functions for each fairness metric on standardized output format
+        # apply fairness metric
+        metric_dict = {}
         for metric in metrics:
-            ## apply fairness metric to predictions
-            metric(list(y_test), results, list(group_test))
-            ## output result (probably by appending to list that becomes result matrix)
+            metric_dict[metric] = utils.apply_metric(
+                metric, results, mdl_obj, *data_attributes)
+        fairness_dict[dataset_name][model_name] = metric_dict
 
-# TODO: couple things to think about: multiple group columns? with/without using group in classification?
+print(pd.DataFrame.from_dict(dict(fairness_dict), orient='index'))
