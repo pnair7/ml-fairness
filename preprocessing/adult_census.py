@@ -3,7 +3,7 @@ import numpy as np
 import json
 
 h = ['age', 'workclass', 'fnlwgt', 'education', 'years-of-education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'Salary']
-data = pd.read_csv('C:/Users/Daniel Tong/Desktop/school stuff/DSC/DSC 180B/ml-fairness/rawDatasets/adult_census_data.txt', names=h)
+data = pd.read_csv('.../rawDatasets/adult_census_data.txt', names=h)
 data = pd.get_dummies(data, columns=['marital-status', 'workclass', 'education', 'occupation', 'relationship', 'race', 'sex', 'native-country'])
 data['above_50k'] = data['Salary'].apply(lambda x: int(x == " >50K"))
 data = data.drop(columns=['Salary'])
@@ -20,6 +20,6 @@ config = {
     'data_script' : 'preprocessing/adult_census.py'
 }
 
-data.to_csv('C:/Users/Daniel Tong/Desktop/school stuff/DSC/DSC 180B/ml-fairness/cleanedDatasets/adult_census/adult_census_data.csv', index = False)
-with open('C:/Users/Daniel Tong/Desktop/school stuff/DSC/DSC 180B/ml-fairness/cleanedDatasets/adult_census/adult_census_config.json', 'w', encoding='utf-8') as f:
+data.to_csv('.../cleanedDatasets/adult_census/adult_census_data.csv', index = False)
+with open('.../cleanedDatasets/adult_census/adult_census_config.json', 'w', encoding='utf-8') as f:
     json.dump(config, f, ensure_ascii=False, indent=4)
