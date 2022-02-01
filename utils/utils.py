@@ -39,5 +39,12 @@ def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_
 
 
 def apply_metric(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    metric_params = (metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config)
     if metric_name == 'FPR':
-        return FPR(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config)
+        return FPR(*metric_params)
+    elif metric_name == 'max_parity_ratio':
+        return max_parity_ratio(*metric_params)
+    elif metric_name == 'equalized_odds_ratio':
+        return equalized_odds(*metric_params)
+    elif metric_name == 'selection_rate':
+        return positive_predictions(*metric_params)

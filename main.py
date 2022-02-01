@@ -7,16 +7,18 @@ from sklearn.model_selection import train_test_split
 from collections import defaultdict
 import os
 
+dataset_dir = 'cleanedDatasets'
+
 # define lists of models, datasets, and metrics
-datasets = os.listdir('cleanedDatasets/')
+datasets = os.listdir(dataset_dir)
 model_names = ['logistic_regression', 'decision_tree']
-metrics = ['FPR']
+metrics = ['FPR', 'max_parity_ratio', 'equalized_odds_ratio', 'selection_rate']
 
 # iterate through (model, dataset, metric) tuples
 fairness_dict = defaultdict(dict)  # dict of resulting 3-D matrix
 for dataset in datasets:
     # read in data (should already be cleaned and in standard format)
-    dataset_path = os.path.join('cleanedDatasets', dataset)
+    dataset_path = os.path.join(dataset_dir, dataset)
     csv_path = list(
         filter(lambda f: f[-3:] == 'csv', os.listdir(dataset_path)))[0]
     json_path = list(
@@ -59,4 +61,7 @@ for dataset in datasets:
                 metric, results, mdl_obj, *data_attributes)
         fairness_dict[dataset_name][model_name] = metric_dict
 
-print(pd.DataFrame.from_dict(dict(fairness_dict), orient='index'))
+print(pd.DataFrame.from_dict({(i, j): fairness_dict[i][j]
+                              for i in fairness_dict.keys()
+                              for j in fairness_dict[i].keys()},
+                             orient='index'))
