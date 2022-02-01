@@ -6,11 +6,21 @@ from metrics.metrics import *
 from sklearn.model_selection import train_test_split
 from collections import defaultdict
 import os
+import sys
 
-dataset_dir = 'cleanedDatasets'
+try:
+    target = sys.argv[1]
+    print(target)
+    if target == 'test':
+        dataset_dir = './testDatasets/'
+    else:
+        dataset_dir = './cleanedDatasets/'
+except:
+    dataset_dir = './cleanedDatasets/'
 
 # define lists of models, datasets, and metrics
 datasets = os.listdir(dataset_dir)
+print(datasets)
 model_names = ['logistic_regression', 'decision_tree']
 metrics = ['FPR', 'max_parity_ratio', 'equalized_odds_ratio', 'selection_rate']
 
