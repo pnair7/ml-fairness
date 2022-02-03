@@ -21,7 +21,7 @@ except:
 # define lists of models, datasets, and metrics
 datasets = os.listdir(dataset_dir)
 print(datasets)
-model_names = ['logistic_regression', 'decision_tree']
+model_names = ['logistic_regression', 'decision_tree', 'random_forest']
 metrics = ['FPR', 'max_parity_ratio', 'equalized_odds_ratio', 'selection_rate']
 
 # iterate through (model, dataset, metric) tuples

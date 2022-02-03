@@ -32,10 +32,13 @@ def split_data(X, y, groups, train_pct=0.75):
 
 
 def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    model_params = (X_train, X_test, y_train, y_test, group_train, group_test, config)
     if model_name == 'logistic_regression':
-        return logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config)
+        return logistic_regression(*model_params)
     elif model_name == 'decision_tree':
-        return decision_tree(X_train, X_test, y_train, y_test, group_train, group_test, config)
+        return decision_tree(*model_params)
+    elif model_name == 'random_forest':
+        return random_forest(*model_params)
 
 
 def apply_metric(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
