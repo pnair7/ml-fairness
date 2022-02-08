@@ -61,14 +61,14 @@ for dataset in datasets:
     for model_name in model_names:
         # apply model to dataset, yield result with predictions
         print('\t' + model_name)
-        results, mdl_obj = utils.run_models(
+        results, results_prob, mdl_obj = utils.run_models(
             model_name, *data_attributes)  # unpacking
 
         # apply fairness metric
         metric_dict = {}
         for metric in metrics:
             metric_dict[metric] = utils.apply_metric(
-                metric, results, mdl_obj, *data_attributes)
+                metric, results, results_prob, mdl_obj, *data_attributes)
         fairness_dict[dataset_name][model_name] = metric_dict
 
 print(pd.DataFrame.from_dict({(i, j): fairness_dict[i][j]

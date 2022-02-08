@@ -2,7 +2,7 @@ from fairlearn.metrics import MetricFrame, false_positive_rate, demographic_pari
 import numpy as np
 
 
-def FPR(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+def FPR(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
     y_true = list(y_test)
     y_pred = list(results)
     groups = list(group_test)
@@ -13,7 +13,7 @@ def FPR(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_t
     return fpr_metric.difference(method='between_groups')
 
 
-def max_parity_ratio(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+def max_parity_ratio(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
     y_true = list(y_test)
     y_pred = list(results)
     groups = list(group_test)
@@ -21,7 +21,7 @@ def max_parity_ratio(metric_name, results, mdl_obj, X_train, X_test, y_train, y_
     return demographic_parity_ratio(y_true=y_true, y_pred=y_pred, sensitive_features=groups)
 
 
-def equalized_odds(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+def equalized_odds(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
     y_true = list(y_test)
     y_pred = list(results)
     groups = list(group_test)
@@ -29,7 +29,7 @@ def equalized_odds(metric_name, results, mdl_obj, X_train, X_test, y_train, y_te
     return equalized_odds_ratio(y_true=y_true, y_pred=y_pred, sensitive_features=groups)
 
 
-def positive_predictions(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+def positive_predictions(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
     y_true = list(y_test)
     y_pred = list(results)
     groups = list(group_test)

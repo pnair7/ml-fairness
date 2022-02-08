@@ -41,8 +41,9 @@ def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_
         return random_forest(*model_params)
 
 
-def apply_metric(metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
-    metric_params = (metric_name, results, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config)
+def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    metric_params = (metric_name, results, results_prob, mdl_obj, X_train,
+                     X_test, y_train, y_test, group_train, group_test, config)
     if metric_name == 'FPR':
         return FPR(*metric_params)
     elif metric_name == 'max_parity_ratio':
