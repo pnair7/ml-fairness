@@ -63,5 +63,5 @@ def calibration_score(metric_name, results, results_prob, mdl_obj, X_train, X_te
     disp = CalibrationDisplay.from_predictions(y_test, y_pred_prob, n_bins=10, strategy='quantile')
     plt.title(str(type(mdl_obj)))
     # plt.show() # Outputs calibration plots, if we need it
-    
+
 # TODO: counterfactual fairness
