@@ -1,0 +1,23 @@
+{
+    "y_col": "pass_bar",
+    "X_cols": [
+        "decile1b",
+        "decile3",
+        "lsat",
+        "ugpa",
+        "zfygpa",
+        "zgpa",
+        "fulltime",
+        "fam_inc",
+        "male",
+        "racetxt",
+        "tier"
+    ],
+    "group_cols": [
+        "y"
+    ],
+    "prediction_type": "binary",
+    "dataset_name": "law Dataset",
+    "data_path": "rawDatasets/rawDatasets/law_data.csv",
+    "data_script": "preprocessing/law.py"
+}
