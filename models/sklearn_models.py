@@ -5,7 +5,7 @@ from sklearn.neural_network import MLPClassifier
 
 
 def logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config, class_weight='balanced'):
-    mdl = LogisticRegression(class_weight=class_weight, solver='sag', max_iter=1000, random_state=42)
+    mdl = LogisticRegression(class_weight=class_weight, solver='sag', random_state=42)
     mdl.fit(X_train, y_train)
     results = list(mdl.predict(X_test))
     results_prob = list(mdl.predict_proba(X_test))
@@ -31,4 +31,6 @@ def random_forest(X_train, X_test, y_train, y_test, group_train, group_test, con
 def multilayer_perceptron(X_train, X_test, y_train, y_test, group_train, group_test, config):
     mlp = MLPClassifier(random_state=42)
     mlp.fit(X_train, y_train)
-    return None
+    results = list(mlp.predict(X_test))
+    results_prob = list(mlp.predict_proba(X_test))
+    return results, results_prob, mlp
