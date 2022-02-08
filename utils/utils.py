@@ -63,5 +63,5 @@ def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
             calibration_score(*metric_params)
     except Exception as e:
         # just to catch metric errors -- don't want one application to mess up a whole run
-        print(metric_name, str(mdl_obj), config['dataset_name'])
+        print('\t\t', metric_name)
         print(e)
