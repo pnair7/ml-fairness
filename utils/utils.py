@@ -41,6 +41,8 @@ def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_
         return random_forest(*model_params)
     elif model_name == 'multilayer_perceptron':
         return multilayer_perceptron(*model_params)
+    elif model_name == 'svm_model':
+        return svm_model(*model_params)
 
 
 def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
@@ -54,3 +56,7 @@ def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
         return equalized_odds(*metric_params)
     elif metric_name == 'selection_rate':
         return positive_predictions(*metric_params)
+    elif metric_name == 'accuracy':
+        return accuracy(*metric_params)
+    elif metric_name == 'calibration_score':
+        calibration_score(*metric_params)

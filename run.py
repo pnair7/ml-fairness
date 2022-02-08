@@ -21,8 +21,8 @@ except:
 # define lists of models, datasets, and metrics
 datasets = os.listdir(dataset_dir)
 print(datasets)
-model_names = ['logistic_regression', 'decision_tree', 'random_forest', 'multilayer_perceptron']
-metrics = ['FPR', 'max_parity_ratio', 'equalized_odds_diff', 'selection_rate']
+model_names = ['logistic_regression', 'decision_tree', 'random_forest', 'multilayer_perceptron', 'svm_model']
+metrics = ['FPR', 'max_parity_ratio', 'equalized_odds_diff', 'selection_rate', 'accuracy']
 
 # iterate through (model, dataset, metric) tuples
 fairness_dict = defaultdict(dict)  # dict of resulting 3-D matrix

@@ -2,6 +2,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 
 
 def logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config, class_weight='balanced'):
@@ -34,3 +37,11 @@ def multilayer_perceptron(X_train, X_test, y_train, y_test, group_train, group_t
     results = list(mlp.predict(X_test))
     results_prob = list(mlp.predict_proba(X_test))
     return results, results_prob, mlp
+
+
+def svm_model(X_train, X_test, y_train, y_test, group_train, group_test, config):
+    clf = make_pipeline(StandardScaler(), SVC(probability=True))
+    clf.fit(X_train, y_train)
+    results = list(clf.predict(X_test))
+    results_prob = list(clf.predict_proba(X_test))
+    return results, results_prob, clf
