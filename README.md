@@ -1,5 +1,7 @@
 # DSC 180B Capstone Project
 
+[Website Link](https://annemxu.github.io/ml-fairness/)
+
 An empirical analysis of machine learning fairness using a variety of metrics, models, and datasets.
 
 ## Instructions
