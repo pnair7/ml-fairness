@@ -71,7 +71,10 @@ for dataset in datasets:
                 metric, results, results_prob, mdl_obj, *data_attributes)
         fairness_dict[dataset_name][model_name] = metric_dict
 
-print(pd.DataFrame.from_dict({(i, j): fairness_dict[i][j]
-                              for i in fairness_dict.keys()
-                              for j in fairness_dict[i].keys()},
-                             orient='index'))
+output_df = pd.DataFrame.from_dict({(i, j): fairness_dict[i][j]
+                                    for i in fairness_dict.keys()
+                                    for j in fairness_dict[i].keys()},
+                                   orient='index')
+
+if dataset_dir == './cleanedDatasets/':
+    output_df.to_csv('fairness_df.csv')

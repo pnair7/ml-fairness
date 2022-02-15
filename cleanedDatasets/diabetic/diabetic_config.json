@@ -9,7 +9,6 @@
         "number_emergency",
         "number_inpatient",
         "number_diagnoses",
-        "readmitted_30",
         "age_[0-10)",
         "age_[10-20)",
         "age_[20-30)",
