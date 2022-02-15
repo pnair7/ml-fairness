@@ -50,7 +50,7 @@ def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
                      X_test, y_train, y_test, group_train, group_test, config)
     try:
         if metric_name == 'precision_range':
-            return precision(*metric_params)
+            return precision_range(*metric_params)
         elif metric_name == 'FPR':
             return FPR(*metric_params)
         elif metric_name == 'max_parity_ratio':
