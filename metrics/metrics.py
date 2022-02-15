@@ -22,11 +22,11 @@ def f1_score_range(metric_name, results, results_prob, mdl_obj, X_train, X_test,
     y_pred = list(results)
     groups = list(group_test)
 
-    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': y_pred})
+    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': groups})
     f1_vals = []
     for group in np.unique(groups):
         subset = df[df['groups'] == group]
-        precision_vals.append(metrics.f1_score(subset['y_true'], subset['y_pred']))
+        f1_vals.append(metrics.f1_score(subset['y_true'], subset['y_pred']))
     return np.ptp(f1_vals)
 
 
@@ -35,7 +35,10 @@ def recall_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
     y_pred = list(results)
     groups = list(group_test)
 
-    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': y_pred})
+    print(np.mean(y_true))
+    print(np.mean(results))
+
+    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': groups})
     recall_vals = []
     for group in np.unique(groups):
         subset = df[df['groups'] == group]
@@ -43,12 +46,26 @@ def recall_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
     return np.ptp(recall_vals)
 
 
-def brier_score(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+def brier_score_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
     y_true = list(y_test)
     y_pred_prob = list(np.array(results_prob)[:, 1])
     groups = list(group_test)
 
-    return brier_score_loss(y_true, y_pred_prob)
+    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred_prob, 'groups': groups})
+    brier_vals = []
+    for group in np.unique(groups):
+        subset = df[df['groups'] == group]
+        brier_vals.append(metrics.brier_score_loss(subset['y_true'], subset['y_pred']))
+    return np.ptp(brier_vals)
+
+
+def overall_brier_score(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    y_true = list(y_test)
+    y_pred_prob = list(np.array(results_prob)[:, 1])
+    groups = list(group_test)
+
+    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred_prob, 'groups': groups})
+    return metrics.brier_score_loss(df['y_true'], df['y_pred'])
 
 
 def precision_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
@@ -56,7 +73,7 @@ def precision_range(metric_name, results, results_prob, mdl_obj, X_train, X_test
     y_pred = list(results)
     groups = list(group_test)
 
-    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': y_pred})
+    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': groups})
     precision_vals = []
     for group in np.unique(groups):
         subset = df[df['groups'] == group]

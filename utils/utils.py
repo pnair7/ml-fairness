@@ -63,7 +63,11 @@ def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
             calibration_score(*metric_params)
         elif metric_name == 'F1':
             return f1_score_range(*metric_params)
+        elif metric_name == 'recall_range':
+            return recall_range(*metric_params)
+        elif metric_name == 'brier_score_range':
+            return brier_score_range(*metric_params)
     except Exception as e:
         # just to catch metric errors -- don't want one application to mess up a whole run
-        print('\t\t', metric_name)
+        print('\n\t\t', metric_name)
         print(e)
