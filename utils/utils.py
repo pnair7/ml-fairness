@@ -49,18 +49,20 @@ def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
     metric_params = (metric_name, results, results_prob, mdl_obj, X_train,
                      X_test, y_train, y_test, group_train, group_test, config)
     try:
-        if metric_name == 'FPR':
+        if metric_name == 'precision_range':
+            return precision(*metric_params)
+        elif metric_name == 'FPR':
             return FPR(*metric_params)
         elif metric_name == 'max_parity_ratio':
             return max_parity_ratio(*metric_params)
         elif metric_name == 'equalized_odds_diff':
             return equalized_odds(*metric_params)
-        elif metric_name == 'selection_rate':
-            return positive_predictions(*metric_params)
-        elif metric_name == 'accuracy':
-            return accuracy(*metric_params)
+        elif metric_name == 'overall_accuracy':
+            return overall_accuracy(*metric_params)
         elif metric_name == 'calibration_score':
             calibration_score(*metric_params)
+        elif metric_name == 'F1':
+            return f1_score_range(*metric_params)
     except Exception as e:
         # just to catch metric errors -- don't want one application to mess up a whole run
         print('\t\t', metric_name)
