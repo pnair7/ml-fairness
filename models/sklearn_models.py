@@ -5,6 +5,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 
 
 def logistic_regression(X_train, X_test, y_train, y_test, group_train, group_test, config, class_weight='balanced'):
@@ -41,6 +43,22 @@ def multilayer_perceptron(X_train, X_test, y_train, y_test, group_train, group_t
 
 def svm_model(X_train, X_test, y_train, y_test, group_train, group_test, config):
     clf = make_pipeline(StandardScaler(), SVC(probability=True))
+    clf.fit(X_train, y_train)
+    results = list(clf.predict(X_test))
+    results_prob = list(clf.predict_proba(X_test))
+    return results, results_prob, clf
+
+
+def nearest_neighbors(X_train, X_test, y_train, y_test, group_train, group_test, config):
+    mdl = KNeighborsClassifier()
+    mdl.fit(X_train, y_train)
+    results = list(mdl.predict(X_test))
+    results_prob = list(mdl.predict_proba(X_test))
+    return results, results_prob, clf
+
+
+def naive_bayes(X_train, X_test, y_train, y_test, group_train, group_test, config):
+    clf = GaussianNB()
     clf.fit(X_train, y_train)
     results = list(clf.predict(X_test))
     results_prob = list(clf.predict_proba(X_test))
