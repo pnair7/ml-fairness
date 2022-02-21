@@ -43,6 +43,10 @@ def run_models(model_name, X_train, X_test, y_train, y_test, group_train, group_
         return multilayer_perceptron(*model_params)
     elif model_name == 'svm_model':
         return svm_model(*model_params)
+    elif model_name == 'naive_bayes':
+        return naive_bayes(*model_params)
+    elif model_name == 'nearest_neighbors':
+        return nearest_neighbors(*model_params)
 
 
 def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):

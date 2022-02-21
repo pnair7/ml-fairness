@@ -54,7 +54,7 @@ def nearest_neighbors(X_train, X_test, y_train, y_test, group_train, group_test,
     mdl.fit(X_train, y_train)
     results = list(mdl.predict(X_test))
     results_prob = list(mdl.predict_proba(X_test))
-    return results, results_prob, clf
+    return results, results_prob, mdl
 
 
 def naive_bayes(X_train, X_test, y_train, y_test, group_train, group_test, config):

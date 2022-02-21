@@ -35,9 +35,6 @@ def recall_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
     y_pred = list(results)
     groups = list(group_test)
 
-    print(np.mean(y_true))
-    print(np.mean(results))
-
     df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': groups})
     recall_vals = []
     for group in np.unique(groups):
