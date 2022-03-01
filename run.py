@@ -21,8 +21,10 @@ except:
 # define lists of models, datasets, and metrics
 datasets = os.listdir(dataset_dir)
 print(datasets)
-model_names = ['logistic_regression', 'decision_tree', 'random_forest', 'multilayer_perceptron', 'svm_model']
-metrics = ['FPR', 'max_parity_ratio', 'equalized_odds_diff', 'selection_rate', 'accuracy']
+model_names = ['logistic_regression', 'naive_bayes', 'nearest_neighbors', 'decision_tree',
+               'random_forest', 'multilayer_perceptron', 'svm_model']
+metrics = ['accuracy_range', 'max_parity_ratio', 'equalized_odds_diff',
+           'overall_accuracy', 'FPR', 'F1', 'recall_range', 'brier_score_range']
 
 # iterate through (model, dataset, metric) tuples
 fairness_dict = defaultdict(dict)  # dict of resulting 3-D matrix
@@ -75,6 +77,7 @@ output_df = pd.DataFrame.from_dict({(i, j): fairness_dict[i][j]
                                     for i in fairness_dict.keys()
                                     for j in fairness_dict[i].keys()},
                                    orient='index')
+print(output_df)
 
 if dataset_dir == './cleanedDatasets/':
     output_df.to_csv('fairness_df.csv')
