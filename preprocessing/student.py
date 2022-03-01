@@ -14,7 +14,7 @@ predictors = list(data.columns)
 config = {
     'y_col': 'high_grade',  # which column are we predicting
     'X_cols': predictors,  # list of columns in X -- predictor variables
-    'group_cols': ['sex_f'],  # what are the groups we're interested in being fair to?
+    'group_cols': ['sex_F'],  # what are the groups we're interested in being fair to?
     'prediction_type': 'binary',
     'dataset_name': 'Student Performance Datset',
     'data_path': 'rawDatasets/student_mat.csv',
