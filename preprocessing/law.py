@@ -29,7 +29,7 @@ predictors = list(data.iloc[:,:-1])
 config = {
     'y_col' : 'pass_bar',
     'X_cols' : predictors,
-    'group_cols' : ['y'],
+    'group_cols' : ['male', 'racetxt'],
     'prediction_type' : 'binary',
     'dataset_name' : 'law Dataset',
     'data_path' : 'rawDatasets/rawDatasets/law_data.csv',
