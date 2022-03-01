@@ -43,6 +43,19 @@ def recall_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
     return np.ptp(recall_vals)
 
 
+def accuracy_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
+    y_true = list(y_test)
+    y_pred = list(results)
+    groups = list(group_test)
+
+    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': groups})
+    recall_vals = []
+    for group in np.unique(groups):
+        subset = df[df['groups'] == group]
+        recall_vals.append(metrics.accuracy_score(subset['y_true'], subset['y_pred']))
+    return np.ptp(recall_vals)
+
+
 def brier_score_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
     y_true = list(y_test)
     y_pred_prob = list(np.array(results_prob)[:, 1])
@@ -63,19 +76,6 @@ def overall_brier_score(metric_name, results, results_prob, mdl_obj, X_train, X_
 
     df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred_prob, 'groups': groups})
     return metrics.brier_score_loss(df['y_true'], df['y_pred'])
-
-
-def precision_range(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):
-    y_true = list(y_test)
-    y_pred = list(results)
-    groups = list(group_test)
-
-    df = pd.DataFrame(data={'y_true': y_true, 'y_pred': y_pred, 'groups': groups})
-    precision_vals = []
-    for group in np.unique(groups):
-        subset = df[df['groups'] == group]
-        precision_vals.append(metrics.precision_score(subset['y_true'], subset['y_pred']))
-    return np.ptp(precision_vals)
 
 
 def max_parity_ratio(metric_name, results, results_prob, mdl_obj, X_train, X_test, y_train, y_test, group_train, group_test, config):

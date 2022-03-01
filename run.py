@@ -23,7 +23,7 @@ datasets = os.listdir(dataset_dir)
 print(datasets)
 model_names = ['logistic_regression', 'naive_bayes', 'nearest_neighbors', 'decision_tree',
                'random_forest', 'multilayer_perceptron', 'svm_model']
-metrics = ['precision_range', 'max_parity_ratio', 'equalized_odds_diff',
+metrics = ['accuracy_range', 'max_parity_ratio', 'equalized_odds_diff',
            'overall_accuracy', 'FPR', 'F1', 'recall_range', 'brier_score_range']
 
 # iterate through (model, dataset, metric) tuples

@@ -71,6 +71,8 @@ def apply_metric(metric_name, results, results_prob, mdl_obj, X_train, X_test, y
             return recall_range(*metric_params)
         elif metric_name == 'brier_score_range':
             return brier_score_range(*metric_params)
+        elif metric_name == 'accuracy_range':
+            return accuracy_range(*metric_params)
     except Exception as e:
         # just to catch metric errors -- don't want one application to mess up a whole run
         print('\n\t\t', metric_name)
