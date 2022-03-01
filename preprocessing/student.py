@@ -9,7 +9,7 @@ data = pd.get_dummies(data, columns=['school', 'sex', 'address', 'address', 'Pst
 data['high_grade'] = data['G1'].apply(lambda x: int(x >= 12))
 data.drop(columns=['G1'], inplace=True)
 
-predictors = list(data.columns)
+predictors = list(data.iloc[:,:-1])
 
 config = {
     'y_col': 'high_grade',  # which column are we predicting
