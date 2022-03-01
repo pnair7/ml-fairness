@@ -49,7 +49,7 @@
         "high_grade"
     ],
     "group_cols": [
-        "sex_f"
+        "sex_F"
     ],
     "prediction_type": "binary",
     "dataset_name": "Student Performance Datset",
