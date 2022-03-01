@@ -1,5 +1,5 @@
 {
-    "y_col": "default payment next month",
+    "y_col": "y",
     "X_cols": [
         "age",
         "job",
@@ -19,7 +19,7 @@
         "poutcome"
     ],
     "group_cols": [
-        "y"
+        "marital"
     ],
     "prediction_type": "binary",
     "dataset_name": "Bank Dataset",
