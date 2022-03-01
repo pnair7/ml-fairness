@@ -4,8 +4,21 @@ import pandas as pd
 import numpy as np
 import json
 from scipy.stats import percentileofscore
+from sklearn.preprocessing import OneHotEncoder
+
 
 data = pd.read_csv('../rawDatasets/bank_data/bank-full.csv',  delimiter=';', quotechar='"')
+
+
+print(data.columns)
+# one-hot encode necessary columns
+onehot_cols = [ 'job', 'marital', 'education', 'default', 'housing',
+       'loan', 'contact', 'month', 'poutcome', ]
+enc = OneHotEncoder(sparse=False, drop='if_binary')
+enc.fit(data[onehot_cols])
+one_hot_applied = pd.DataFrame(enc.transform(data[onehot_cols]), columns=enc.get_feature_names_out())
+data = data.drop(columns=onehot_cols)
+data = data.merge(one_hot_applied, left_index=True, right_index=True)
 
 
 print(data.columns)
@@ -23,7 +36,7 @@ predictors = list(data.iloc[:,:-1])
 config = {
     'y_col' : 'y',
     'X_cols' : predictors,
-    'group_cols' : ['marital'],
+    'group_cols' : [ 'marital_divorced', 'marital_married', 'marital_single'],
     'prediction_type' : 'binary',
     'dataset_name' : 'Bank Dataset',
     'data_path' : 'rawDatasets/bank_data/bank-full.csv',
