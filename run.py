@@ -50,7 +50,8 @@ for dataset in datasets:
         y = df[config['y_col']]
         # TODO: handle multiple groups -- should be trivial, not worrying about it now
         groups = df[config['group_cols'][0]]
-    except:
+    except Exception as e:
+        print(e)
         print('\tError reading columns from ', dataset_name)
         continue
 
