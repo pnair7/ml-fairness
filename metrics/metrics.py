@@ -1,7 +1,7 @@
 from fairlearn.metrics import MetricFrame, false_positive_rate, demographic_parity_ratio, equalized_odds_ratio, selection_rate, equalized_odds_difference
 import numpy as np
 import pandas as pd
-from sklearn.calibration import CalibrationDisplay
+# from sklearn.calibration import CalibrationDisplay
 from sklearn import metrics
 import matplotlib.pyplot as plt
 
