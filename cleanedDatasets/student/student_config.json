@@ -45,8 +45,7 @@
         "higher_no",
         "higher_yes",
         "internet_no",
-        "internet_yes",
-        "high_grade"
+        "internet_yes"
     ],
     "group_cols": [
         "sex_F"
