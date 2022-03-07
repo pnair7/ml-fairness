@@ -1,0 +1,21 @@
+dataset,model,FPR,max_parity_ratio,equalized_odds_diff,selection_rate,accuracy
+Adult Data Set (Census),logistic_regression,0.065213908,0.22165729,0.294210526,0.118658641,0.785284363
+Adult Data Set (Census),decision_tree,0.125140202,0.199803684,0.626315789,0.242107849,0.816852966
+Adult Data Set (Census),random_forest,0.068738984,0.109018422,0.630526316,0.199852598,0.861073578
+Adult Data Set (Census),multilayer_perceptron,0.064092293,0.197047502,0.325263158,0.125046063,0.793391475
+Adult Data Set (Census),svm_model,0.057683064,0.100825962,0.572105263,0.177742292,0.855914507
+Diabetes Dataset 1999-2008,logistic_regression,,0,,0.109740803,1
+Diabetes Dataset 1999-2008,decision_tree,,0,,0.109740803,1
+Diabetes Dataset 1999-2008,random_forest,,0,,0.109740803,1
+Diabetes Dataset 1999-2008,multilayer_perceptron,,0,,0.109740803,1
+Diabetes Dataset 1999-2008,svm_model,0,0,0.965714286,0.105978261,0.996237458
+Loans Default Dataset,logistic_regression,0.219642243,0.61310732,0.358244365,0.2508,0.685466667
+Loans Default Dataset,decision_tree,0.179050568,0.440057226,0.40688019,0.230266667,0.727866667
+Loans Default Dataset,random_forest,0.053835569,0.147588244,0.364768683,0.123733333,0.815466667
+Loans Default Dataset,multilayer_perceptron,0.255761954,0.506120486,0.505338078,0.311866667,0.690533333
+Loans Default Dataset,svm_model,0.038011696,0.114647083,0.331553974,0.104,0.820266667
+Obermeyer Health Dataset,logistic_regression,0.60202874,0.629550054,0.956284153,0.612659888,0.41472614
+Obermeyer Health Dataset,decision_tree,0.019273035,0.044929495,0.428961749,0.031567727,0.96416858
+Obermeyer Health Dataset,random_forest,0.002535926,0.007308258,0.346994536,0.012873073,0.977943588
+Obermeyer Health Dataset,multilayer_perceptron,0.005494505,0.015834559,0.346994536,0.015742867,0.975073795
+Obermeyer Health Dataset,svm_model,0.000253593,0.015469146,0.016393443,0.000737947,0.970236143

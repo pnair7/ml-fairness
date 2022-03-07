@@ -1,14 +1,250 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-	<title> DSC 180 </title>
-	</head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script src="https://kit.fontawesome.com/bd3e357fb4.js" crossorigin="anonymous"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	<body>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <link rel="stylesheet" href="./style.css">
+   <!-- HIGHCHARTS -->
 
-		<h1> .. </h1>
-	</body>
+
+   <script type="module" src="https://d3js.org/d3.v6.min.js"></script>
 
 
-	</html>
+
+
+   <title> DSC180B B10 </title>
+</head>
+
+<body>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+   <script src="https://code.highcharts.com/modules/export-data.js"></script>
+   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+   
+  
+   <header id="nav-wrapper">
+      <nav id="nav">
+         <div class="nav left">
+            <span class=" skew" id="spans_logo">
+               <h1 class="h1_logo un-skew"><a href="#home"><img id="img_logo" src="assets/images/B10.png" alt="B10_logo"
+                        height="80px">
+                  </a></h1>
+            </span>
+            <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
+         </div>
+         <div class="nav right">
+            <a href="#home" class="nav-link active"><span class="nav-link-span"><span
+                     class="u-nav">Home</span></span></a>
+            <a href="#intro" class="nav-link"><span class="nav-link-span"><span class="u-nav">intro</span></span></a>
+            <a href="#matrix" class="nav-link"><span class="nav-link-span"><span class="u-nav">matrix</span></span></a>
+            <a href="https://dsc180b.wl.r.appspot.com" class="nav-link"><span class="nav-link-span"><span class="u-nav">demo </span></span></a>
+            <a href="./about.html" class="nav-link"><span class="nav-link-span"><span
+                     class="u-nav">about</span></span></a>
+         </div>
+      </nav>
+   </header>
+   <br> <br><br>
+   <main>
+      <!-- p-2 p-md-5 m-md-3  -->
+      <div id="main-header" class="position-relative overflow-hidden text-center bg-light">
+         <div class="col-md-5 p-lg-5 mx-auto my-3">
+            <h1 class="display-4 fw-normal">Machine Learning Fairness Matrix</h1>
+            <p class="lead fw-normal">DSC 180B | B10</p>
+            <a class="btn btn-outline-secondary" href="#intro">Intro</a>
+         </div>
+      </div>
+      <div id="intro" class="container-sm">
+         <div class="row mx-auto my-5">
+            <h1> Intro</h1>
+            <p>
+               Today, machine learning tools are becoming increasingly common and are being used for decision-making in important contexts. However, the algorithms that are used often are suspect to many biases and it’s often hard to determine if they are fair or not in the intuitive sense. Due to this issue, there have been efforts to create mathematical definitions of fairness to see if an algorithm is being fair. 
+</p>
+<p> 
+               But this is difficult because we know very little of how different fairness definitions relate to different models. 
+               </p>
+               <p>
+               Our capstone project centers around furthering research done in the area of fairness in machine learning, and how  it relates to specific data and models. We have produced a 3-dimensional matrix displaying the performances of different combinations of models and datasets, evaluated on different fairness metrics. 
+            </p> 
+         </div>
+      </div>
+      <!-- <div id="problem-statement" class="row text-center d-md-flex pt-4 pb-1">
+         <p class="lead"> <i> are there some machine learning models
+               that are more suited for fairness than others?</i></p>
+      </div> -->
+      <!-- <div class="container-sm">
+         <div class="row mx-auto my-5">
+            <p>
+               To study this question, we plan to do empirical analysis of different machine learning models’
+               performance using a host of different fairness metrics. We will try to use models, metrics, and datasets
+               that come from different real-world domains, as well
+               as different types of prediction, and we will be to produce a 3-dimensional matrix of the performance of
+               a certain machine learning model, for a certain definition of fairness, for a certain given dataset.
+            </p>
+         </div>
+      </div> -->
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+         <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+               <h2 class="display-5">Fairness Metrics</h2>
+               <p class="lead pb-0 mb-0">Common fairness metrics that exist in ML literature</p>
+      
+        
+             
+              <br><br><b> Overall Accuracy
+             </b> - Overall accuracy of predictions on test set. Higher is better, 1 is ideal.
+             <br><br><b>Overall Brier Score </b> - Measures quality of calibration given predicted probabilities and true classes. Lower is better, 0 is ideal.
+             <br><br><b>Demographic Parity (ratio) </b> - Measures whether different classes are being predicted positive at the same rates, agnostic of actual features. Higher is better, 1 is ideal.
+             <br>
+             <br> 
+             <i> For these below metrics, we’re measuring the maximum difference between the metric values for all groups in protected class. Lower is better, with 0 being ideal.
+             </i><br><br><b>F1 Score (range) </b> - Measure of classification accuracy that combines precision and recall.
+<br><br><b>Equalized Odds (range) </b> - Measures whether all groups have same probability of being predicted positive, for both true positives and negatives.
+<br><br><b>False Positive Rate (range) </b> - Measures proportion of true negatives are incorrectly predicted as positives.
+<br><br><b>Recall (range) </b> - Measures what proportion of true positive labels are in fact predicted as positives.
+<br><br><b>Brier Score (range) </b> - Measures calibration quality for a single group.
+<br><br><b>Accuracy (range) </b> - Measures accuracy of predictions for a single group.
+<br><br>
+
+         
+         </div>
+         <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"
+            style="color:black !important;">
+         
+               <h2 class="display-5">Models </h2>
+               <p class="lead pb-0 mb-0">popular machine learning architectures</p>
+            <div>
+               <p>
+                  <br><br><b>Logistic Regression</b> - Regression model where log odds are a linear combination of predictor variables.
+                  <br><br><b>Naïve Bayes</b> - Simple Bayesian network with low computational time complexity, but which assumes features are independent.
+                  <br><br><b>k-Nearest Neighbors</b> - Classifies points by assigning most common class among k nearest points in the feature space; in scikit-learn defaults, k = 5.
+                  <br><br><b>Decision Tree</b> - Learns a branched tree of conditions about each data point, with each leaf assigning the point to the most likely class.
+                  <br><br><b>Random Forest</b> - Ensemble method that uses bootstrapping and random subsets of features to create multiple decision trees, choosing the most common prediction as the class label.
+                  <br><br><b>Support Vector Machine</b> - Aims to optimally separate points with a hyperplane in the feature space with the greatest distance from each class.
+                  <br><br><b>Multilayer Perceptron</b> - Basic feedforward neural network for classification, uses stochastic gradient descent to train.
+                  
+               </p>
+               <br><br>
+            </div>
+         </div>
+      </div>
+
+
+
+      <div id="matrix" class="container_sm">
+         <div class="row mx-auto ">
+            <div class="row mx-auto my-5">
+            
+
+               <div class = "mt-5 mx-5">
+                  <h1> matrix result</h1>
+
+                
+               </div>
+
+
+            </div>
+
+
+
+            <figure class="highcharts-figure">
+               <div id="matrixContainer"></div>
+               <p class="highcharts-description">
+                 <br>
+                  <label for="selectDataset"> Choose a Dataset: </label>
+                  <input list="selecDataset2" onfocus="this.value=''" onchange="this.blur();" value="Adult Data Set (Census)"
+                     name="browser" id="selectDataset" class="selectStyle">
+                  <datalist name="selectDataset" id="selecDataset2">
+                     <option value="all">all </option>
+                     <option value="Adult Data Set (Census)">Adult Data Set (Census)</option>
+                     <option value="Bank Dataset">Bank Dataset</option>
+                     <option value="Communities and Crime">Communities and Crime</option>
+                     <option value="Diabetes Dataset 1999-2008">Diabetes Dataset 1999-2008  </option>
+                     <option value="law Dataset">law Dataset</option>
+                     <option value="Student Performance Datset">Student Performance Datset</option>
+
+
+               
+                     <option value="Loans Default Dataset">Loans Default Dataset</option>
+                     <option value="Obermeyer Health Dataset">Obermeyer Health Dataset</option>
+                  </datalist>
+               </p>
+             </figure>
+
+
+
+         </div>
+
+
+
+
+      </div>
+  
+
+      <div id="demoo" class="container-sm">
+         <div class="row mx-auto my-5">
+            <h1> Demo</h1>
+            <p>
+              To try out our code with your own CSV, feel free to test our <a href = "https://dsc180b.wl.r.appspot.com/" target = "_blank"><b>  demo </b> </a> which displays a table 
+              of certain models and metrics given a CSV and config details.  
+         </div>
+      </div>
+   </main>
+   <footer class="container py-5">
+      <div class="row">
+         <div class="col-12 col-md">
+            <img src="assets/images/B10.png" height="70px" />
+            <small class="d-block mb-3 text-muted">&copy; 2022</small>
+         </div>
+         <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+               <li><a class="link-secondary" target="_blank" href="https://github.com/pnair7/ml-fairness">Github</a>
+               </li>
+            </ul>
+         </div>
+         <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+               <li><a class="link-secondary" target="_blank" href="/about.html">Team</a></li>
+               <li><a class="link-secondary" target="_blank"
+                     href="https://dsc-capstone.github.io/assignments/quarter-2-project/">Capstone Website</a></li>
+            </ul>
+         </div>
+      </div>
+   </footer>
+   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+   <script src="./script.js"></script>
+
+</body>
+<script src='https://yandex.st/highlightjs/8.0/highlight.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.globe.min.js'></script>
+<script>
+   VANTA.GLOBE({
+      el: "#main-header",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0xfabd20,
+      backgroundColor: 0x182B49
+   })
+   $(document).ready(function () {
+      hljs.initHighlightingOnLoad();
+   });
+</script>
+
+</html>
