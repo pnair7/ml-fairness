@@ -35,3 +35,10 @@ Raw datasets sit in the `rawDatasets/` folder, and can be processed by a script 
     "data_script": "preprocessing/obermeyer.py"          # script to preprocess raw data (not used)
 }
 ```
+
+### Adding your own models or metrics
+Adding your own models or metrics is a little more involved, but still quite simple. 
+
+Currently, models are contained in `models/sklearn_models.py`. First, you must write a model function that takes in the same parameters as the other models, which can be located in the same file, or in a different file in the `models` directory. Next, in the `utils/utils.py` file, you must import the model, and add the model to the `run_models` function, assigning it a string name for the model to map to the function. Finally, you must add the string name of the model to the list of models at the top of `run.py`.
+
+The process is nearly identical for metrics. Create a metric function that takes in the same parameters as the other metric functions, add the metric to the `apply_metric` function in `utils/utils.py` with its own string name, and add that string name to the list of metrics in `run.py`.
