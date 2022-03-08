@@ -1,4 +1,4 @@
-# DSC 180B Capstone Project
+# Patterns of Fairness in Machine Learning
 
 [Website Link](https://annemxu.github.io/ml-fairness/)
 
