@@ -2,6 +2,8 @@
 
 [Website Link](https://annemxu.github.io/ml-fairness/)
 
+[Report Link](https://raw.githubusercontent.com/pnair7/artifact-directory-template/main/report.pdf)
+
 An empirical analysis of machine learning fairness using a variety of metrics, models, and datasets.
 
 ## Instructions
